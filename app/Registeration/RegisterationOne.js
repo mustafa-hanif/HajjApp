@@ -1,16 +1,25 @@
 import { useState } from "react"
 import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View, Image, TextInput } from "react-native"
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity
+} from "react-native"
 import * as ImagePicker from "expo-image-picker"
 
 import { AntDesign } from "@expo/vector-icons"
+import { useRouter } from "expo-router/src/hooks"
 
 export default function RegisterationOne() {
+  const router = useRouter()
   return (
     <View style={styles.container}>
       <Image
-        style={{ width: 343, height: 17 }}
-        source={require("../../assets/topBar.png")}
+        style={{ width: "100%", height: 17 }}
+        source={require("../../assets/topBarOne.png")}
       />
       <View style={{ marginTop: 100, marginBottom: 10, padding: 10 }}>
         <Text style={{ fontSize: 35, fontWeight: "bold" }}>What is</Text>
@@ -38,7 +47,11 @@ export default function RegisterationOne() {
           placeholder="Enter your name"
         />
       </View>
-      <View
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => {
+          router.push("Registeration/RegisterationTwo")
+        }}
         style={{
           position: "absolute",
           bottom: 30,
@@ -56,13 +69,14 @@ export default function RegisterationOne() {
       >
         <Text style={{ fontWeight: "bold", color: "white" }}>Continue</Text>
         <AntDesign name="arrowright" size={28} color="white" />
-      </View>
+      </TouchableOpacity>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    width: "100%",
     padding: 10,
     flex: 1,
     marginTop: 50,

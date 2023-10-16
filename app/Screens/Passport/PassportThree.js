@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react"
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native"
 import { Camera } from "expo-camera"
 import { AntDesign, Entypo } from "@expo/vector-icons"
+import { useRouter } from "expo-router"
 
-export default function UserImageThree() {
+export default function PassportThree() {
+  const router = useRouter()
   return (
     <View style={styles.container}>
       <View style={{ alignSelf: "center", marginTop: 200 }}>
-        <Image source={require("../../assets/verify.png")} />
+        <Image source={require("../../../assets/verify.png")} />
       </View>
       <Text
         style={{
@@ -18,7 +20,7 @@ export default function UserImageThree() {
           textAlign: "center"
         }}
       >
-        Your Photo is
+        Your passport is
       </Text>
       <Text
         style={{
@@ -33,11 +35,13 @@ export default function UserImageThree() {
       <View style={{ position: "absolute", bottom: 20, left: 25 }}>
         <Image
           style={{ height: 40, width: 40 }}
-          source={require("../../assets/questionLogo.png")}
+          source={require("../../../assets/questionLogo.png")}
         />
       </View>
 
-      <View
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => router.push("/Documents")}
         style={{
           position: "absolute",
           bottom: 30,
@@ -55,13 +59,14 @@ export default function UserImageThree() {
       >
         <Text style={{ fontWeight: "bold", color: "#037020" }}>Continue</Text>
         <AntDesign name="arrowright" size={28} color="#037020" />
-      </View>
+      </TouchableOpacity>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    width: "100%",
     marginTop: 50,
     flex: 1,
     backgroundColor: "#003014" // Dark green background color

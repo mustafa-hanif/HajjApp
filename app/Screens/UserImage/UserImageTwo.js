@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react"
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native"
 import { Camera } from "expo-camera"
 import { AntDesign, Entypo } from "@expo/vector-icons"
+import { useRouter } from "expo-router"
 
-export default function PassportTwo() {
+export default function UserImageTwo() {
+  const router = useRouter()
   const [hasPermission, setHasPermission] = useState(null)
   const [camera, setCamera] = useState(null)
   const [capturedImage, setCapturedImage] = useState(null)
@@ -54,7 +56,7 @@ export default function PassportTwo() {
               fontWeight: "bold"
             }}
           >
-            towards the first page
+            towards the
           </Text>
           <Text
             style={{
@@ -64,13 +66,13 @@ export default function PassportTwo() {
               fontSize: 30
             }}
           >
-            in your passport
+            passport size photo.
           </Text>
         </View>
       )}
       {imageClicked && (
         <View style={{ marginTop: 100, padding: 10, alignSelf: "center" }}>
-          <Image source={require("../../assets/check.png")} />
+          <Image source={require("../../../assets/check.png")} />
         </View>
       )}
       <View
@@ -104,11 +106,15 @@ export default function PassportTwo() {
       <View style={{ position: "absolute", bottom: 20, left: 25 }}>
         <Image
           style={{ height: 40, width: 40 }}
-          source={require("../../assets/questionLogo.png")}
+          source={require("../../../assets/questionLogo.png")}
         />
       </View>
       {imageClicked && (
-        <View
+        <TouchableOpacity
+          onPress={() => {
+            router.push("Screens/UserImage/UserImageThree")
+          }}
+          activeOpacity={0.6}
           style={{
             position: "absolute",
             bottom: 30,
@@ -126,7 +132,7 @@ export default function PassportTwo() {
         >
           <Text style={{ fontWeight: "bold", color: "#037020" }}>Continue</Text>
           <AntDesign name="arrowright" size={28} color="#037020" />
-        </View>
+        </TouchableOpacity>
       )}
     </View>
   )
@@ -134,6 +140,7 @@ export default function PassportTwo() {
 
 const styles = StyleSheet.create({
   container: {
+    width: "100%",
     marginTop: 50,
     flex: 1,
     backgroundColor: "#003014" // Dark green background color
@@ -146,8 +153,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     position: "absolute",
     top: 250,
-    height: "32%",
-    width: "80%"
+    height: "45%",
+    width: "75%"
   },
   camera: {
     height: "100%",

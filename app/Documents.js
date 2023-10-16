@@ -1,20 +1,29 @@
 import { useState } from "react"
 import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View, Image, TextInput } from "react-native"
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity
+} from "react-native"
 import * as ImagePicker from "expo-image-picker"
 
 import { AntDesign } from "@expo/vector-icons"
+import { useRouter } from "expo-router"
 
 export default function Documents() {
   const [first, setFirst] = useState(0)
   const [second, setSecond] = useState(0)
   const [three, setThree] = useState(0)
   const [four, setFour] = useState(0)
+  const router = useRouter()
   return (
     <View style={styles.container}>
       <Image
-        style={{ width: 343, height: 17 }}
-        source={require("../assets/topBar.png")}
+        style={{ width: "100%", height: 17 }}
+        source={require("../assets/topBarFive.png")}
       />
       <View style={{ marginTop: 60, marginBottom: 2, padding: 10 }}>
         <View style={{ display: "flex", flexDirection: "row" }}>
@@ -51,14 +60,28 @@ export default function Documents() {
             gap: 10
           }}
         >
-          <Image
-            style={{ height: 150, width: 150 }}
-            source={require("../assets/PassportD.png")}
-          />
-          <Image
-            style={{ height: 150, width: 150 }}
-            source={require("../assets/cnicD.png")}
-          />
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => {
+              router.push("/Screens/Passport/PassportOne")
+            }}
+          >
+            <Image
+              style={{ height: 150, width: 150 }}
+              source={require("../assets/PassportD.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => {
+              router.push("/Screens/CNIC/CnicOne")
+            }}
+          >
+            <Image
+              style={{ height: 150, width: 150 }}
+              source={require("../assets/cnicD.png")}
+            />
+          </TouchableOpacity>
         </View>
 
         <View
@@ -69,14 +92,28 @@ export default function Documents() {
             gap: 10
           }}
         >
-          <Image
-            style={{ height: 150, width: 150 }}
-            source={require("../assets/VaccineD.png")}
-          />
-          <Image
-            style={{ height: 150, width: 150 }}
-            source={require("../assets/UserImageD.png")}
-          />
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => {
+              router.push("/Screens/CovidVaccine/VaccineOne")
+            }}
+          >
+            <Image
+              style={{ height: 150, width: 150 }}
+              source={require("../assets/VaccineD.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => {
+              router.push("/Screens/UserImage/UserImageOne")
+            }}
+          >
+            <Image
+              style={{ height: 150, width: 150 }}
+              source={require("../assets/UserImageD.png")}
+            />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -111,6 +148,7 @@ export default function Documents() {
 
 const styles = StyleSheet.create({
   container: {
+    width: "100%",
     padding: 10,
     flex: 1,
     marginTop: 50,
