@@ -23,7 +23,7 @@ export default function RegisterationFive() {
         style={{ width: "100%", height: 17 }}
         source={require("../../assets/topBarFour.png")}
       />
-      <View style={{ marginTop: 100, marginBottom: 10, padding: 10 }}>
+      <View style={{ marginTop: 30, marginBottom: 10, padding: 10 }}>
         <Text style={{ fontSize: 35, fontWeight: "bold" }}>Who is your</Text>
 
         <Text style={{ fontSize: 35, color: "#00AA00", fontWeight: "bold" }}>
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     marginTop: 50,
-    backgroundColor: "##fff",
+    backgroundColor: "#F7FBEF",
     alignItems: "left"
   },
   circle: {

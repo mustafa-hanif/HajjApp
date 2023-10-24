@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     marginTop: 50,
-    backgroundColor: "##fff",
+    backgroundColor: "#F7FBEF",
     alignItems: "left"
   },
   circle: {

@@ -3,8 +3,11 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native"
 import { Camera } from "expo-camera"
 import { AntDesign, Entypo } from "@expo/vector-icons"
 import { useRouter } from "expo-router"
+import { incrementNumber, setPassport } from "../../redux/DocumentSlice"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function PassportTwo() {
+  const dispatch = useDispatch()
   const router = useRouter()
   const [hasPermission, setHasPermission] = useState(null)
   const [camera, setCamera] = useState(null)
@@ -21,7 +24,7 @@ export default function PassportTwo() {
   const takePicture = async () => {
     if (camera) {
       const photo = await camera.takePictureAsync()
-      setCapturedImage(photo.uri) // Store the captured image URI
+      setCapturedImage(photo.uri)
       setImageClicked(true)
     }
   }
@@ -88,6 +91,7 @@ export default function PassportTwo() {
           style={styles.camera}
           type={Camera.Constants.Type.back}
           ref={(ref) => setCamera(ref)}
+          ratio="1:1"
         >
           {capturedImage ? (
             <Image
@@ -113,6 +117,8 @@ export default function PassportTwo() {
         <TouchableOpacity
           onPress={() => {
             router.push("Screens/Passport/PassportThree")
+            dispatch(setPassport())
+            dispatch(incrementNumber())
           }}
           activeOpacity={0.5}
           style={{
@@ -143,7 +149,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 50,
     flex: 1,
-    backgroundColor: "#003014" // Dark green background color
+    backgroundColor: "#003014"
   },
   cameraContainer: {
     borderRadius: 2,

@@ -18,6 +18,22 @@ export default function CnicOne() {
   const [three, setThree] = useState(0)
   const [four, setFour] = useState(0)
   const router = useRouter()
+
+  const pickLogo = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [3, 2],
+      quality: 1
+    })
+    if (!result.canceled) {
+      console.log(result.assets[0].uri)
+      // setImage(result.assets[0].uri)
+      // setImageError("")
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Image
@@ -64,6 +80,9 @@ export default function CnicOne() {
         <Entypo name="camera" size={28} color="white" />
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={() => {
+          pickLogo()
+        }}
         activeOpacity={0.5}
         style={{
           padding: 16,

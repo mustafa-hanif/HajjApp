@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 50,
     flex: 1,
-    backgroundColor: "#003014" // Dark green background color
+    backgroundColor: "#003014"
   },
   cameraContainer: {
     borderRadius: 2,

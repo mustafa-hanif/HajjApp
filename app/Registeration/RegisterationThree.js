@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { StatusBar } from "expo-status-bar"
 import {
   StyleSheet,
@@ -19,6 +19,17 @@ export default function RegisterationThree() {
   const [three, setThree] = useState(0)
   const [four, setFour] = useState(0)
   const router = useRouter()
+
+  const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)]
+
+  const handleInputChange = (text, index) => {
+    if (text.length === 1 && index < 3) {
+      inputRefs[index + 1].current.focus()
+    } else if (text.length === 0 && index > 0) {
+      inputRefs[index - 1].current.focus()
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Image
@@ -50,7 +61,29 @@ export default function RegisterationThree() {
           gap: 10
         }}
       >
-        <TextInput
+        {inputRefs.map((ref, index) => (
+          <TextInput
+            key={index}
+            ref={ref}
+            style={{
+              textAlign: "center",
+              fontSize: 18,
+              width: "20%",
+              backgroundColor: "#D3FDE8",
+              height: 50,
+              fontStyle: "italic",
+              padding: 10,
+              borderRadius: 6,
+              borderWidth: 2,
+              borderColor: "green",
+              borderStyle: "solid"
+            }}
+            placeholder="0"
+            maxLength={1} // Limit input to one character
+            onChangeText={(text) => handleInputChange(text, index)}
+          />
+        ))}
+        {/* <TextInput
           style={{
             textAlign: "center",
             fontSize: 18,
@@ -113,7 +146,7 @@ export default function RegisterationThree() {
             borderStyle: "solid"
           }}
           placeholder="0"
-        />
+        /> */}
       </View>
       <TouchableOpacity
         activeOpacity={0.6}
@@ -154,7 +187,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     marginTop: 50,
-    backgroundColor: "##fff",
+    backgroundColor: "#F7FBEF",
     alignItems: "left"
   },
   circle: {

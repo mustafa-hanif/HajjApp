@@ -3,8 +3,11 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native"
 import { Camera } from "expo-camera"
 import { AntDesign, Entypo } from "@expo/vector-icons"
 import { useRouter } from "expo-router"
+import { useDispatch } from "react-redux"
+import { incrementNumber, setCNIC } from "../../redux/DocumentSlice"
 
 export default function CnicTwo() {
+  const dispatch = useDispatch()
   const router = useRouter()
   const [hasPermission, setHasPermission] = useState(null)
   const [camera, setCamera] = useState(null)
@@ -21,7 +24,7 @@ export default function CnicTwo() {
   const takePicture = async () => {
     if (camera) {
       const photo = await camera.takePictureAsync()
-      setCapturedImage(photo.uri) // Store the captured image URI
+      setCapturedImage(photo.uri)
       setImageClicked(true)
     }
   }
@@ -78,6 +81,7 @@ export default function CnicTwo() {
           style={styles.camera}
           type={Camera.Constants.Type.back}
           ref={(ref) => setCamera(ref)}
+          ratio="3:2"
         >
           {capturedImage ? (
             <Image
@@ -104,6 +108,8 @@ export default function CnicTwo() {
           activeOpacity={0.6}
           onPress={() => {
             router.push("Screens/CNIC/CnicThree")
+            dispatch(setCNIC())
+            dispatch(incrementNumber())
           }}
           style={{
             position: "absolute",
@@ -132,7 +138,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 50,
     flex: 1,
-    backgroundColor: "#003014" // Dark green background color
+    backgroundColor: "#003014"
   },
   cameraContainer: {
     borderRadius: 2,

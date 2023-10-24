@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { StatusBar } from "expo-status-bar"
 import {
   StyleSheet,
@@ -11,20 +11,50 @@ import {
 import * as ImagePicker from "expo-image-picker"
 
 import { AntDesign } from "@expo/vector-icons"
-import { useRouter } from "expo-router"
+import { useFocusEffect, useRouter } from "expo-router"
+import { useSelector } from "react-redux"
 
 export default function Documents() {
+  const document = useSelector((state) => state.document)
+  console.log(document)
   const [first, setFirst] = useState(0)
   const [second, setSecond] = useState(0)
   const [three, setThree] = useState(0)
   const [four, setFour] = useState(0)
   const router = useRouter()
+
   return (
     <View style={styles.container}>
-      <Image
-        style={{ width: "100%", height: 17 }}
-        source={require("../assets/topBarFive.png")}
-      />
+      {document.number == 0 && (
+        <Image
+          style={{ width: "100%", height: 17 }}
+          source={require("../assets/topBarSix.png")}
+        />
+      )}
+      {document.number == 1 && (
+        <Image
+          style={{ width: "100%", height: 17 }}
+          source={require("../assets/topBarSix.png")}
+        />
+      )}
+      {document.number == 2 && (
+        <Image
+          style={{ width: "100%", height: 17 }}
+          source={require("../assets/topBarSeven.png")}
+        />
+      )}
+      {document.number == 3 && (
+        <Image
+          style={{ width: "100%", height: 17 }}
+          source={require("../assets/topBarEight.png")}
+        />
+      )}
+      {document.number == 4 && (
+        <Image
+          style={{ width: "100%", height: 17 }}
+          source={require("../assets/topBarNine.png")}
+        />
+      )}
       <View style={{ marginTop: 60, marginBottom: 2, padding: 10 }}>
         <View style={{ display: "flex", flexDirection: "row" }}>
           <Text style={{ fontSize: 25, fontWeight: "bold" }}>
@@ -51,69 +81,201 @@ export default function Documents() {
           You can take a photo of the document or upload it from your device.
         </Text>
       </View>
-      <View style={{ display: "flex", gap: 10, padding: 13 }}>
+      <View
+        style={{ display: "flex", gap: 10, padding: 13, alignSelf: "center" }}
+      >
         <View
           style={{
+            alignSelf: "center",
             display: "flex",
             flexDirection: "row",
             display: "flex",
             gap: 10
           }}
         >
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => {
-              router.push("/Screens/Passport/PassportOne")
-            }}
-          >
-            <Image
-              style={{ height: 150, width: 150 }}
-              source={require("../assets/PassportD.png")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => {
-              router.push("/Screens/CNIC/CnicOne")
-            }}
-          >
-            <Image
-              style={{ height: 150, width: 150 }}
-              source={require("../assets/cnicD.png")}
-            />
-          </TouchableOpacity>
+          {document?.passport ? (
+            <View style={{ position: "relative", margin: 10 }}>
+              <View style={{ padding: 8 }}>
+                <AntDesign name="checkcircle" size={90} color="green" />
+              </View>
+              <Text
+                style={{
+                  marginTop: 7,
+                  color: "green",
+                  fontWeight: "500",
+                  textAlign: "center"
+                }}
+              >
+                Passport Verified
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  router.push("Screens/Passport/PassportOne")
+                }}
+                activeOpacity={0.6}
+                style={{ position: "absolute", top: 0, right: 0 }}
+              >
+                <Image source={require("../assets/edit_icon.png")} />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => {
+                router.push("/Screens/Passport/PassportOne")
+              }}
+            >
+              <Image
+                style={{ height: 150, width: 150 }}
+                source={require("../assets/PassportD.png")}
+              />
+            </TouchableOpacity>
+          )}
+          {document?.cnic ? (
+            <View style={{ position: "relative", margin: 10 }}>
+              <View style={{ padding: 8 }}>
+                <AntDesign name="checkcircle" size={90} color="green" />
+              </View>
+              <Text
+                style={{
+                  marginTop: 7,
+                  color: "green",
+                  fontWeight: "500",
+                  textAlign: "center"
+                }}
+              >
+                CNIC Verified
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  router.push("Screens/CNIC/CnicOne")
+                }}
+                activeOpacity={0.6}
+                style={{ position: "absolute", top: 0, right: 0 }}
+              >
+                <Image source={require("../assets/edit_icon.png")} />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => {
+                router.push("/Screens/CNIC/CnicOne")
+              }}
+            >
+              <Image
+                style={{ height: 150, width: 150 }}
+                source={require("../assets/cnicD.png")}
+              />
+            </TouchableOpacity>
+          )}
         </View>
 
         <View
           style={{
+            alignSelf: "center",
             display: "flex",
             flexDirection: "row",
             display: "flex",
             gap: 10
           }}
         >
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => {
-              router.push("/Screens/CovidVaccine/VaccineOne")
-            }}
-          >
-            <Image
-              style={{ height: 150, width: 150 }}
-              source={require("../assets/VaccineD.png")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => {
-              router.push("/Screens/UserImage/UserImageOne")
-            }}
-          >
-            <Image
-              style={{ height: 150, width: 150 }}
-              source={require("../assets/UserImageD.png")}
-            />
-          </TouchableOpacity>
+          {document?.vaccine ? (
+            <View style={{ position: "relative", margin: 10 }}>
+              <View style={{ padding: 8 }}>
+                <AntDesign name="checkcircle" size={90} color="green" />
+              </View>
+              <View style={{ marginTop: 7 }}>
+                <Text
+                  style={{
+                    color: "green",
+                    fontWeight: "500",
+                    textAlign: "center"
+                  }}
+                >
+                  Vaccine certificate
+                </Text>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    color: "green",
+                    fontWeight: "500"
+                  }}
+                >
+                  Verified
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  router.push("Screens/CovidVaccine/VaccineOne")
+                }}
+                activeOpacity={0.6}
+                style={{ position: "absolute", top: 0, right: 0 }}
+              >
+                <Image source={require("../assets/edit_icon.png")} />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => {
+                router.push("/Screens/CovidVaccine/VaccineOne")
+              }}
+            >
+              <Image
+                style={{ height: 150, width: 150 }}
+                source={require("../assets/VaccineD.png")}
+              />
+            </TouchableOpacity>
+          )}
+          {document?.image ? (
+            <View style={{ position: "relative", margin: 10 }}>
+              <View style={{ padding: 8 }}>
+                <AntDesign name="checkcircle" size={90} color="green" />
+              </View>
+              <View style={{ marginTop: 7 }}>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    color: "green",
+                    fontWeight: "500"
+                  }}
+                >
+                  Passport Size
+                </Text>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    color: "green",
+                    fontWeight: "500"
+                  }}
+                >
+                  photo Verified
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  router.push("Screens/CNIC/CnicOne")
+                }}
+                activeOpacity={0.6}
+                style={{ position: "absolute", top: 0, right: 0 }}
+              >
+                <Image source={require("../assets/edit_icon.png")} />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => {
+                router.push("/Screens/UserImage/UserImageOne")
+              }}
+            >
+              <Image
+                style={{ height: 150, width: 150 }}
+                source={require("../assets/UserImageD.png")}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
 
@@ -142,6 +304,31 @@ export default function Documents() {
           source={require("../assets/questionLogo.png")}
         />
       </View>
+      {document.number >= 4 && (
+        <TouchableOpacity
+          activeOpacity={0.6}
+          // onPress={() => {
+          //   router.push("Registeration/RegisterationFour")
+          // }}
+          style={{
+            position: "absolute",
+            bottom: 30,
+            right: 20,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 5,
+            justifyContent: "center",
+            backgroundColor: "#037020",
+            width: "40%",
+            padding: 6,
+            borderRadius: 6
+          }}
+        >
+          <Text style={{ fontWeight: "bold", color: "white" }}>Continue</Text>
+          <AntDesign name="arrowright" size={28} color="white" />
+        </TouchableOpacity>
+      )}
     </View>
   )
 }

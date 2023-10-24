@@ -140,13 +140,12 @@ export default function Welcome() {
           <AntDesign name="arrowright" size={28} color="white" />
         </TouchableOpacity>
       </View>
-      <Image
+      {/* <Image
         style={{ width: "100%" }}
         source={require("../assets/greenBG.png")}
-      />
+      /> */}
       {/* </View> */}
-      {/* <View style={styles.circle}>
-      </View> */}
+      <View style={styles.circle}></View>
     </View>
   )
 }

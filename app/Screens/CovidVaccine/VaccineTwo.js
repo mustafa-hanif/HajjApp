@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native"
 import { Camera } from "expo-camera"
 import { AntDesign, Entypo } from "@expo/vector-icons"
 import { useRouter } from "expo-router"
+import { useDispatch } from "react-redux"
+import { incrementNumber, setVaccine } from "../../redux/DocumentSlice"
 
 export default function VaccineTwo() {
   const router = useRouter()
@@ -10,6 +12,7 @@ export default function VaccineTwo() {
   const [camera, setCamera] = useState(null)
   const [capturedImage, setCapturedImage] = useState(null)
   const [imageClicked, setImageClicked] = useState(false)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     ;(async () => {
@@ -21,7 +24,7 @@ export default function VaccineTwo() {
   const takePicture = async () => {
     if (camera) {
       const photo = await camera.takePictureAsync()
-      setCapturedImage(photo.uri) // Store the captured image URI
+      setCapturedImage(photo.uri)
       setImageClicked(true)
     }
   }
@@ -88,6 +91,7 @@ export default function VaccineTwo() {
           style={styles.camera}
           type={Camera.Constants.Type.back}
           ref={(ref) => setCamera(ref)}
+          // ratio="1:1"
         >
           {capturedImage ? (
             <Image
@@ -114,6 +118,8 @@ export default function VaccineTwo() {
           activeOpacity={0.6}
           onPress={() => {
             router.push("Screens/CovidVaccine/VaccineThree")
+            dispatch(setVaccine())
+            dispatch(incrementNumber())
           }}
           style={{
             position: "absolute",
@@ -143,7 +149,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 50,
     flex: 1,
-    backgroundColor: "#003014" // Dark green background color
+    backgroundColor: "#003014"
   },
   cameraContainer: {
     borderRadius: 2,
