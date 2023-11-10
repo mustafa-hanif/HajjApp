@@ -10,10 +10,14 @@ import {
 } from "react-native"
 import * as ImagePicker from "expo-image-picker"
 
-import { AntDesign } from "@expo/vector-icons"
-import { useRouter } from "expo-router"
+import { AntDesign, Ionicons } from "@expo/vector-icons"
+import { useNavigation, useRouter } from "expo-router"
 
 export default function RegisterationFive() {
+  const navigation = useNavigation()
+  const handleGoBack = () => {
+    navigation.goBack()
+  }
   const [phoneCode, setPhoneCode] = useState("")
   const [mobileNumber, setMobileNumber] = useState("")
   const router = useRouter()
@@ -23,6 +27,15 @@ export default function RegisterationFive() {
         style={{ width: "100%", height: 17 }}
         source={require("../../assets/topBarFour.png")}
       />
+      <TouchableOpacity
+        style={{ margin: 5 }}
+        activeOpacity={0.5}
+        onPress={() => {
+          handleGoBack()
+        }}
+      >
+        <Ionicons name="arrow-back" size={32} color="black" />
+      </TouchableOpacity>
       <View style={{ marginTop: 30, marginBottom: 10, padding: 10 }}>
         <Text style={{ fontSize: 35, fontWeight: "bold" }}>Who is your</Text>
 

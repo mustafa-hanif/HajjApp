@@ -14,7 +14,9 @@ import { AntDesign } from "@expo/vector-icons"
 import { useRouter } from "expo-router/src/hooks"
 
 export default function RegisterationOne() {
+  const [name, setName] = useState()
   const router = useRouter()
+  console.log(name)
   return (
     <View style={styles.container}>
       <Image
@@ -32,6 +34,9 @@ export default function RegisterationOne() {
       </View>
       <View style={{ padding: 10 }}>
         <TextInput
+          onChange={(val) => {
+            setName(val)
+          }}
           style={{
             fontSize: 14,
             width: "100%",

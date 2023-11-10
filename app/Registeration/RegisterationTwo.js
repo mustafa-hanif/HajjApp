@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { StatusBar } from "expo-status-bar"
+import { useNavigation } from "expo-router"
 import {
   StyleSheet,
   Text,
@@ -10,10 +11,14 @@ import {
 } from "react-native"
 import * as ImagePicker from "expo-image-picker"
 
-import { AntDesign } from "@expo/vector-icons"
+import { AntDesign, Ionicons } from "@expo/vector-icons"
 import { useRouter } from "expo-router"
 
 export default function RegisterationTwo() {
+  const navigation = useNavigation()
+  const handleGoBack = () => {
+    navigation.goBack()
+  }
   const [phoneCode, setPhoneCode] = useState("")
   const [mobileNumber, setMobileNumber] = useState("")
   const router = useRouter()
@@ -23,6 +28,15 @@ export default function RegisterationTwo() {
         style={{ width: "100%", height: 17 }}
         source={require("../../assets/topBarTwo.png")}
       />
+      <TouchableOpacity
+        style={{ margin: 5 }}
+        activeOpacity={0.5}
+        onPress={() => {
+          handleGoBack()
+        }}
+      >
+        <Ionicons name="arrow-back" size={32} color="black" />
+      </TouchableOpacity>
       <View style={{ marginTop: 100, marginBottom: 10, padding: 10 }}>
         <Text style={{ fontSize: 35, fontWeight: "bold" }}>What is your</Text>
 

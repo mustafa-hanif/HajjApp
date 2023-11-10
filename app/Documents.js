@@ -10,11 +10,16 @@ import {
 } from "react-native"
 import * as ImagePicker from "expo-image-picker"
 
-import { AntDesign } from "@expo/vector-icons"
+import { AntDesign, Ionicons } from "@expo/vector-icons"
 import { useFocusEffect, useRouter } from "expo-router"
 import { useSelector } from "react-redux"
+import { useNavigation } from "expo-router"
 
 export default function Documents() {
+  const navigation = useNavigation()
+  const handleGoBack = () => {
+    navigation.goBack()
+  }
   const document = useSelector((state) => state.document)
   console.log(document)
   const [first, setFirst] = useState(0)
@@ -55,7 +60,16 @@ export default function Documents() {
           source={require("../assets/topBarNine.png")}
         />
       )}
-      <View style={{ marginTop: 60, marginBottom: 2, padding: 10 }}>
+      <TouchableOpacity
+        style={{ margin: 5 }}
+        activeOpacity={0.5}
+        onPress={() => {
+          handleGoBack()
+        }}
+      >
+        <Ionicons name="arrow-back" size={32} color="black" />
+      </TouchableOpacity>
+      <View style={{ marginTop: 30, marginBottom: 2, padding: 10 }}>
         <View style={{ display: "flex", flexDirection: "row" }}>
           <Text style={{ fontSize: 25, fontWeight: "bold" }}>
             Please upload the
@@ -307,9 +321,9 @@ export default function Documents() {
       {document.number >= 4 && (
         <TouchableOpacity
           activeOpacity={0.6}
-          // onPress={() => {
-          //   router.push("Registeration/RegisterationFour")
-          // }}
+          onPress={() => {
+            router.push("Start")
+          }}
           style={{
             position: "absolute",
             bottom: 30,

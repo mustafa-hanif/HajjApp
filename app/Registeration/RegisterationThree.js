@@ -10,15 +10,20 @@ import {
 } from "react-native"
 import * as ImagePicker from "expo-image-picker"
 
-import { AntDesign } from "@expo/vector-icons"
-import { useRouter } from "expo-router"
+import { AntDesign, Ionicons } from "@expo/vector-icons"
+import { useNavigation, useRouter } from "expo-router"
 
 export default function RegisterationThree() {
-  const [first, setFirst] = useState(0)
-  const [second, setSecond] = useState(0)
-  const [three, setThree] = useState(0)
-  const [four, setFour] = useState(0)
+  // const [first, setFirst] = useState(0)
+  // const [second, setSecond] = useState(0)
+  // const [three, setThree] = useState(0)
+  // const [four, setFour] = useState(0)
   const router = useRouter()
+
+  const navigation = useNavigation()
+  const handleGoBack = () => {
+    navigation.goBack()
+  }
 
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)]
 
@@ -36,6 +41,15 @@ export default function RegisterationThree() {
         style={{ width: "100%", height: 17 }}
         source={require("../../assets/topBarTwo.png")}
       />
+      <TouchableOpacity
+        style={{ margin: 5 }}
+        activeOpacity={0.5}
+        onPress={() => {
+          handleGoBack()
+        }}
+      >
+        <Ionicons name="arrow-back" size={32} color="black" />
+      </TouchableOpacity>
       <View style={{ marginTop: 100, marginBottom: 2, padding: 10 }}>
         <Text style={{ fontSize: 35, fontWeight: "bold" }}>
           Please enter the
@@ -79,7 +93,7 @@ export default function RegisterationThree() {
               borderStyle: "solid"
             }}
             placeholder="0"
-            maxLength={1} // Limit input to one character
+            maxLength={1}
             onChangeText={(text) => handleInputChange(text, index)}
           />
         ))}
